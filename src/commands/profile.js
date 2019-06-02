@@ -1,4 +1,4 @@
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, role) => {
     let user;
     message.mentions.users.forEach(function(guildMember) {
         user = guildMember;
@@ -6,12 +6,15 @@ exports.run = async (client, message, args) => {
     if(!user) user = message.author;
     try {
         const donation = await client.getDonation(user);
-        client.showPlayerCard(message.channel, user, donation);
+        return client.showPlayerCard(message.channel, user, donation);
     } catch (e) {
         return client.errorMessage("This user has no donation profile yet", message.channel);
     }
-}
+};
 
 exports.help = {
-    name: "profile"
+    name: "profile",
+    rank: "default",
+    desc: "Shows the user profile of a given user",
+    guide: "#profile [user:optional]"
 };

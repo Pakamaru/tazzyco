@@ -4,7 +4,6 @@ const fs = require("fs");
 const client = new Client();
 
 client.commands = new Collection();
-client.mongoose = require('./utils/mongoose.js');
 require('./utils/function.js')(client);
 
 fs.readdir('src/events/', async (err, files) => {
@@ -29,5 +28,4 @@ fs.readdir('src/commands/', async (err, files) => {
     })
 });
 
-client.mongoose.init();
 client.login(token);

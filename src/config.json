@@ -1,6 +1,14 @@
 {
   "prefix": "%",
   "token": "NTgzMjc3MDY1NjE3NDA4MDMx.XO6DvQ._x93UwLZemnJ_3FlrqydGohrxs8",
+  "guildSettings": {
+    "admin": {
+      "role": {
+        "id": "584486088228470845",
+        "name": "admin"
+      }
+    }
+  },
   "defaultSettings": {
     "modRole": "",
     "modChannel": "",
