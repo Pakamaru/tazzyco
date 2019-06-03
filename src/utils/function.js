@@ -29,8 +29,24 @@ module.exports = client => {
                 if (numReplaced == 1) return resolve();
             });
         });
+    };
+
+    client.getTopDonations = () => {
+        return new Promise((resolve, reject) => {
+            db.find({}).group({key: {'totalDonation': {$sum: ['contribution', 'money']}}}).exec((err, docs) => {
+                console.log(docs);
+            });
 
 
+
+
+
+            /*db.find({}).group({ key: {'totalDonation': {$sum: ['contribution', 'money' ]}}}).sort({'totalDonation': -1}).exec((err, docs) => {
+                console.log(docs);
+                if(docs.length < 1) return reject(err);
+                if(docs.length > 0) return resolve(docs);
+            });*/
+        });
     };
 
 
@@ -83,6 +99,14 @@ module.exports = client => {
             .setFooter(`This profile belongs to ${user.username}`, client.user.avatarURL)
             .addField(`Total donations: ${donation.money+donation.contribution}`, `Total money donated: ${donation.money}\nTotal faction contribution: ${donation.contribution}`)
         return channel.send(playercard);
-    }
+    };
+
+    client.showTopDonations = (channel, output, amt) => {
+        let listCard = new discord.RichEmbed()
+            .setTitle("Top donators of the server")
+            .setColor('#FFFFFF')
+            .addField(`Top ${amt} donators:`, output);
+        return channel.send(listCard);
+    };
 
 };
